@@ -395,3 +395,48 @@ body {
   display: block;
   margin: 0 auto;
 }
+.speech {
+  position: relative;
+  display: inline-block;
+  max-width: 190px;
+  padding: 12px 16px;
+  margin-bottom: 8px;
+
+  background: #ffffff;
+  border: 3px solid #061936;
+  border-radius: 22px;
+
+  color: #061936;
+  font-size: 16px;
+  font-weight: 900;
+  line-height: 1.15;
+  text-align: center;
+
+  box-shadow: 0 6px 14px rgba(6, 25, 54, 0.16);
+}
+
+.worker-side:first-child .speech::after {
+  content: "";
+  position: absolute;
+  right: 22px;
+  bottom: -18px;
+  width: 22px;
+  height: 22px;
+  background: #ffffff;
+  border-right: 3px solid #061936;
+  border-bottom: 3px solid #061936;
+  transform: rotate(45deg);
+}
+
+.worker-side:last-child .speech::after {
+  content: "";
+  position: absolute;
+  left: 22px;
+  bottom: -18px;
+  width: 22px;
+  height: 22px;
+  background: #ffffff;
+  border-left: 3px solid #061936;
+  border-bottom: 3px solid #061936;
+  transform: rotate(-45deg);
+}
