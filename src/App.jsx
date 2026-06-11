@@ -128,7 +128,15 @@ function App() {
   }, [rows]);
 
   const hasData = rows.length > 0;
+const isGood = hasData ? data.displayDifference < 0 : true;
 
+const leftSpeech = isGood
+  ? "Dat ging sneller dan gepland!"
+  : "Volgende week pakken we terug!";
+
+const rightSpeech = isGood
+  ? "Mooi resultaat team!"
+  : "Samen verbeteren we dit!";
   return (
     <div className="app">
       <div className="poster">
@@ -162,7 +170,7 @@ function App() {
 
         <div className="hero">
           <div className="worker-side">
-            <div className="speech">Dat ging sneller dan gepland!</div>
+          <div className="speech">{leftSpeech}</div>
           <div className="worker">
   <img src="/images/man.png" alt="Man" />
 </div>
@@ -179,7 +187,7 @@ function App() {
           </div>
 
           <div className="worker-side">
-            <div className="speech">Mooi resultaat team!</div>
+           <div className="speech">{rightSpeech}</div>
            <div className="worker">
   <img src="/images/vrouw.png" alt="Vrouw" />
 </div>
