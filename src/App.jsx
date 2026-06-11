@@ -126,35 +126,45 @@ function App() {
 <div className="chart-section">
   <h3>AFWIJKINGEN T.O.V. NORM <span>(in uren)</span></h3>
 
-  <div className="bar-chart">
-    <div className="bar positive" style={{ height: "76px" }}><span>+76</span></div>
-    <div className="bar positive" style={{ height: "120px" }}><span>+157</span></div>
-    <div className="bar positive" style={{ height: "132px" }}><span>+174</span></div>
-    <div className="bar positive" style={{ height: "36px" }}><span>+21</span></div>
-    <div className="bar positive" style={{ height: "32px" }}><span>+18</span></div>
-    <div className="bar positive" style={{ height: "26px" }}><span>+12</span></div>
+  <div className="split-chart">
+    {[
+      ["Potplanten", 76],
+      ["WP", 157],
+      ["Kool", 174],
+      ["Clip/Stiek", 21],
+      ["Oppot", 18],
+      ["Omrijden", 12],
+      ["Machinaal", -7],
+      ["Toppen", -18],
+      ["Uitzetten", -28],
+      ["STNW", -30],
+      ["Extra", -48],
+      ["Uitvl", -63],
+    ].map(([label, value]) => (
+      <div className="chart-col" key={label}>
+        <div className="positive-zone">
+          {value > 0 && (
+            <>
+              <span className="bar-value positive-text">+{value}</span>
+              <div className="split-bar positive" style={{ height: `${Math.abs(value) * 0.75}px` }} />
+            </>
+          )}
+        </div>
 
-    <div className="bar negative" style={{ height: "20px" }}><span>-7</span></div>
-    <div className="bar negative" style={{ height: "34px" }}><span>-18</span></div>
-    <div className="bar negative" style={{ height: "54px" }}><span>-28</span></div>
-    <div className="bar negative" style={{ height: "60px" }}><span>-30</span></div>
-    <div className="bar negative" style={{ height: "82px" }}><span>-48</span></div>
-    <div className="bar negative" style={{ height: "100px" }}><span>-63</span></div>
-  </div>
+        <div className="zero-line"></div>
 
-  <div className="chart-labels">
-    <span>Potplanten</span>
-    <span>WP</span>
-    <span>Kool</span>
-    <span>Clip/Stiek</span>
-    <span>Oppot</span>
-    <span>Omrijden</span>
-    <span>Machinaal</span>
-    <span>Toppen</span>
-    <span>Uitzetten</span>
-    <span>STNW</span>
-    <span>Extra</span>
-    <span>Uitvl</span>
+        <div className="negative-zone">
+          {value < 0 && (
+            <>
+              <div className="split-bar negative" style={{ height: `${Math.abs(value) * 1.1}px` }} />
+              <span className="bar-value negative-text">{value}</span>
+            </>
+          )}
+        </div>
+
+        <div className="split-label">{label}</div>
+      </div>
+    ))}
   </div>
 </div>
 <div className="road-section">
