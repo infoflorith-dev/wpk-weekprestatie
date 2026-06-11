@@ -241,3 +241,59 @@ body {
   font-weight: 900;
   color: #061936;
 }
+.road-section {
+  margin-top: 20px;
+  padding: 20px;
+  border: 2px solid #9eb8d6;
+  border-radius: 16px;
+}
+
+.road-title {
+  text-align: center;
+  color: #0b376a;
+  font-size: 28px;
+  font-weight: 900;
+  margin-bottom: 25px;
+}
+
+.road-track {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.road-sign {
+  text-align: center;
+  font-size: 40px;
+  font-weight: 900;
+  color: #0b376a;
+}
+
+.road-sign div {
+  font-size: 20px;
+}
+
+.tractor {
+  font-size: 60px;
+  text-align: center;
+  color: #1c8c3a;
+}
+
+.tractor span {
+  display: block;
+  font-size: 22px;
+  font-weight: 900;
+  color: white;
+  background: #1c8c3a;
+  padding: 6px 20px;
+  border-radius: 20px;
+}
+
+.road-result {
+  background: #45ad45;
+  color: white;
+  font-size: 34px;
+  font-weight: 900;
+  padding: 18px 28px;
+  border-radius: 12px;
+}
