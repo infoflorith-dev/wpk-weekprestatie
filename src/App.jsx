@@ -152,6 +152,16 @@ const heroMessage =
     : isBad
     ? "AANDACHTSPUNT VOOR VOLGENDE WEEK"
     : "VRIJWEL VOLGENS PLANNING";
+  const heroHours = hasData
+  ? Math.abs(data.displayDifference).toFixed(0)
+  : "0";
+
+const heroResult =
+  isGood
+    ? "ONDER DE NORM"
+    : isBad
+    ? "BOVEN DE NORM"
+    : "ROND DE NORM";
   return (
     <div className="app">
       <div className="poster">
@@ -194,11 +204,11 @@ const heroMessage =
           <div className="hero-center">
             <div className="hero-text">TEAM WPK HEEFT DEZE WEEK</div>
 
-            <div className="score">
-              {hasData ? `${data.displayDifference.toFixed(0)} UUR` : "0 UUR"}
-            </div>
+           <div className="score">
+  {heroHours}
+</div>
 
-            <div className="hero-text">BETER GEPRESTEERD DAN DE NORM!</div>
+            <div className="hero-text">{heroResult}</div>
           </div>
 
           <div className="worker-side">
