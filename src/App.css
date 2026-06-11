@@ -177,3 +177,67 @@ body {
   font-size: 95px;
   text-align: center;
 }
+.chart-section {
+  margin-top: 14px;
+  border: 2px solid #9eb8d6;
+  border-radius: 16px;
+  padding: 14px 18px 18px;
+}
+
+.chart-section h3 {
+  margin: 0 0 12px;
+  color: #061936;
+  font-size: 26px;
+  font-weight: 900;
+}
+
+.chart-section h3 span {
+  font-size: 16px;
+}
+
+.bar-chart {
+  height: 170px;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 12px;
+  align-items: end;
+  border-bottom: 3px solid #061936;
+  padding: 0 10px;
+}
+
+.bar {
+  position: relative;
+  width: 100%;
+  border-radius: 4px 4px 0 0;
+}
+
+.bar span {
+  position: absolute;
+  top: -24px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 14px;
+  font-weight: 900;
+}
+
+.bar.positive {
+  background: #45ad45;
+}
+
+.bar.negative {
+  background: #ef3228;
+}
+
+.bar.negative span {
+  color: #ef3228;
+}
+
+.chart-labels {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 8px;
+  margin-top: 8px;
+  font-size: 9px;
+  font-weight: 900;
+  color: #061936;
+}
