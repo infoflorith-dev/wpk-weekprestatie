@@ -2,7 +2,9 @@ import React, { useMemo, useState } from "react";
 import * as XLSX from "xlsx";
 
 function App() {
-  const [rows, setRows] = useState([]);
+ const [rows, setRows] = useState([]);
+const [fileName, setFileName] = useState("");
+const [debugText, setDebugText] = useState("Geen Excel geladen");
 
   const cleanTaskName = (name) => {
     return String(name || "")
@@ -26,7 +28,8 @@ function App() {
   const handleExcelUpload = async (event) => {
     const file = event.target.files[0];
     if (!file) return;
-
+setFileName(file.name);
+setDebugText("Excel wordt gelezen...");
     const data = await file.arrayBuffer();
     const workbook = XLSX.read(data);
     const sheet = workbook.Sheets[workbook.SheetNames[0]];
@@ -49,6 +52,7 @@ function App() {
       .filter((row) => row.task && row.difference !== 0);
 
     setRows(parsed);
+setDebugText(`${parsed.length} regels geladen uit ${file.name}`);
   };
 
   const data = useMemo(() => {
@@ -101,9 +105,13 @@ function App() {
           </label>
 
           <button>📄 PDF downloaden</button>
-        </div>
+       </div>
 
-        <div className="hero">
+<div style={{ fontSize: "12px", fontWeight: 700, color: "#0b376a", marginBottom: "8px" }}>
+  {debugText}
+</div>
+
+<div className="hero">
           <div className="worker-side">
             <div className="speech">Dat ging sneller dan gepland!</div>
             <div className="worker">👨‍💼</div>
