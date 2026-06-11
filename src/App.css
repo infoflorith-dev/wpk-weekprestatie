@@ -165,7 +165,11 @@ body {
   font-size: 17px;
   font-weight: 800;
 }
-
+.top-item span:last-child {
+  text-align: right;
+  white-space: nowrap;
+  font-size: 14px;
+}
 .top-box.green .top-item span:last-child {
   color: #16833a;
 }
