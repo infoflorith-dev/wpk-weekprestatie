@@ -166,9 +166,8 @@ function App() {
       <div>NORM</div>
     </div>
 
-    <div className="tractor">
-      🚜
-      <span>TEAM WPK</span>
+   🚜🌱🌱🌱
+<span>TEAM WPK →</span>
     </div>
 
     <div className="road-result">
