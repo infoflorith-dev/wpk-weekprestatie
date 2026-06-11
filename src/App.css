@@ -440,3 +440,9 @@ body {
   border-bottom: 3px solid #061936;
   transform: rotate(-45deg);
 }
+.score-unit {
+  font-size: 64px;
+  font-weight: 900;
+  color: #9be04d;
+  line-height: 0.9;
+}
