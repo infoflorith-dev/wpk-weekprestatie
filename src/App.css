@@ -257,7 +257,6 @@ body {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  top: -24px;
   font-size: 14px;
   font-weight: 900;
   white-space: nowrap;
@@ -265,11 +264,13 @@ body {
 }
 
 .positive-text {
-  color: #ef3228;
+  top: -24px;
+  color: #16833a;
 }
 
 .negative-text {
-  color: #16833a;
+  top: 8px;
+  color: #ef3228;
 }
 
 .split-label {
