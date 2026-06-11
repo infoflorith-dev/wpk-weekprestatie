@@ -62,9 +62,39 @@ setDebugText(`${parsed.length} regels geladen uit ${file.name}`);
   };
 
  const data = useMemo(() => {
-  const normalRows = rows.filter(
-    (r) => r.task.toLowerCase() !== "total"
-  );
+  cconst normalRowsRaw = rows.filter(
+  (r) => r.task.toLowerCase() !== "total"
+);
+
+const grouped = {};
+
+normalRowsRaw.forEach((row) => {
+  if (!grouped[row.task]) {
+    grouped[row.task] = {
+      task: row.task,
+      worked: 0,
+      planned: 0,
+      difference: 0,
+      percentage: 0,
+    };
+  }
+
+  grouped[row.task].worked += row.worked;
+  grouped[row.task].planned += row.planned;
+});
+
+const normalRows = Object.values(grouped).map((row) => {
+  const difference = row.worked - row.planned;
+  const percentage = row.planned !== 0
+    ? (difference / row.planned) * 100
+    : 0;
+
+  return {
+    ...row,
+    difference,
+    percentage,
+  };
+});
 
   const totalRow = rows.find(
     (r) => r.task.toLowerCase() === "total"
