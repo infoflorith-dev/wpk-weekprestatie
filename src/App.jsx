@@ -204,8 +204,9 @@ const heroResult =
           <div className="hero-center">
             <div className="hero-text">TEAM WPK HEEFT DEZE WEEK</div>
 
-           <div className="score">
+         <div className="score">
   {heroHours}
+  <div className="score-unit">UUR</div>
 </div>
 
             <div className="hero-text">{heroResult}</div>
