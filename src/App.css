@@ -85,3 +85,40 @@ body {
   color: #91d85a;
   margin: 10px 0;
 }
+.stats-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  margin-top: 20px;
+}
+
+.stat-card {
+  border: 2px solid #9eb8d6;
+  border-radius: 14px;
+  padding: 16px 10px;
+  background: #ffffff;
+  min-height: 120px;
+}
+
+.stat-title {
+  font-size: 15px;
+  font-weight: 900;
+  color: #0b376a;
+}
+
+.stat-value {
+  margin-top: 8px;
+  font-size: 44px;
+  font-weight: 900;
+  color: #09569b;
+}
+
+.stat-value.green {
+  color: #1c8c3a;
+}
+
+.stat-unit {
+  font-size: 16px;
+  font-weight: 700;
+  color: #0b376a;
+}
