@@ -76,9 +76,7 @@ setDebugText(`${parsed.length} regels geladen uit ${file.name}`);
     ? totalRow.difference
     : normalRows.reduce((sum, r) => sum + r.difference, 0);
 
-  const savedHours = totalDifference < 0
-    ? Math.abs(totalDifference)
-    : -totalDifference;
+const displayDifference = totalWorked - totalPlanned;
 
   const realisation = totalPlanned > 0
     ? (totalWorked / totalPlanned) * 100
@@ -101,7 +99,7 @@ setDebugText(`${parsed.length} regels geladen uit ${file.name}`);
     totalWorked,
     totalPlanned,
     totalDifference,
-    savedHours,
+    displayDifference,
     realisation,
     good,
     bad,
@@ -145,7 +143,7 @@ setDebugText(`${parsed.length} regels geladen uit ${file.name}`);
             <div className="hero-text">TEAM WPK HEEFT DEZE WEEK</div>
 
             <div className="score">
-              {hasData ? `+${data.savedHours.toFixed(0)} UUR` : "+412 UUR"}
+              {hasData ? `+${data.displayDifference.toFixed(0))} UUR` : "+412 UUR"}
             </div>
 
             <div className="hero-text">BETER GEPRESTEERD DAN DE NORM!</div>
@@ -177,7 +175,7 @@ setDebugText(`${parsed.length} regels geladen uit ${file.name}`);
           <div className="stat-card">
             <div className="stat-title">VERSCHIL</div>
             <div className="stat-value green">
-              {hasData ? `+${data.savedHours.toFixed(0)}` : "+412"}
+              {hasData ? `+${data.displayDifference.toFixed(0)}` : "+412"}
             </div>
             <div className="stat-unit">uur</div>
           </div>
@@ -294,7 +292,7 @@ setDebugText(`${parsed.length} regels geladen uit ${file.name}`);
             </div>
 
             <div className="road-result">
-              <div>{hasData ? `+${data.savedHours.toFixed(0)} UUR` : "+412 UUR"}</div>
+              <div>{hasData ? `+${data.displayDifference.toFixed(0)} UUR` : "+412 UUR"}</div>
               <div>VOORSPRONG!</div>
             </div>
           </div>
