@@ -143,7 +143,7 @@ const displayDifference = totalWorked - totalPlanned;
             <div className="hero-text">TEAM WPK HEEFT DEZE WEEK</div>
 
             <div className="score">
-              {hasData ? `+${data.displayDifference.toFixed(0))} UUR` : "+412 UUR"}
+              {hasData ? `${data.displayDifference.toFixed(0)} UUR` : "-412 UUR"}
             </div>
 
             <div className="hero-text">BETER GEPRESTEERD DAN DE NORM!</div>
@@ -175,7 +175,7 @@ const displayDifference = totalWorked - totalPlanned;
           <div className="stat-card">
             <div className="stat-title">VERSCHIL</div>
             <div className="stat-value green">
-              {hasData ? `+${data.displayDifference.toFixed(0)}` : "+412"}
+              {hasData ? data.displayDifference.toFixed(0) : "-412"}
             </div>
             <div className="stat-unit">uur</div>
           </div>
@@ -292,7 +292,7 @@ const displayDifference = totalWorked - totalPlanned;
             </div>
 
             <div className="road-result">
-              <div>{hasData ? `+${data.displayDifference.toFixed(0)} UUR` : "+412 UUR"}</div>
+             <div>{hasData ? `${data.displayDifference.toFixed(0)} UUR` : "-412 UUR"}</div>
               <div>VOORSPRONG!</div>
             </div>
           </div>
