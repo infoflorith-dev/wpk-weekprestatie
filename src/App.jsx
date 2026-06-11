@@ -62,7 +62,7 @@ setDebugText(`${parsed.length} regels geladen uit ${file.name}`);
   };
 
  const data = useMemo(() => {
-  cconst normalRowsRaw = rows.filter(
+  const normalRowsRaw = rows.filter(
   (r) => r.task.toLowerCase() !== "total"
 );
 
