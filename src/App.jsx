@@ -90,10 +90,10 @@ const displayDifference = totalWorked - totalPlanned;
     .filter((r) => r.difference > 0)
     .sort((a, b) => b.difference - a.difference);
 
-  const chartData = [
-    ...good.slice(0, 6),
-    ...bad.slice(0, 6),
-  ];
+ const chartData = [
+  ...good.slice(0, 5),
+  ...bad.slice(0, 5),
+];
 
   return {
     totalWorked,
