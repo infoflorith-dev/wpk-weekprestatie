@@ -118,11 +118,13 @@ const displayDifference = totalWorked - totalPlanned;
     ? (totalWorked / totalPlanned) * 100
     : 0;
 
- const good = normalRows
+ const rankedRows = normalRows.filter((r) => r.planned >= 10);
+
+const good = rankedRows
   .filter((r) => r.percentage < 0)
   .sort((a, b) => a.percentage - b.percentage);
 
-const bad = normalRows
+const bad = rankedRows
   .filter((r) => r.percentage > 0)
   .sort((a, b) => b.percentage - a.percentage);
 
