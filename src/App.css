@@ -179,16 +179,22 @@ body {
   text-align: center;
 }
 
-/* GRAFIEK — groen boven de lijn, rood strak onder de lijn */
+/* Grafiek:
+   AFSPRAAK:
+   - Groen = MIN uren = beter dan norm
+   - Rood = PLUS uren = meer uren dan norm / aandacht
+   - Waardes staan boven de nul-lijn
+   - Balken raken altijd de nul-lijn
+*/
 .chart-section {
   margin-top: 14px;
   border: 2px solid #9eb8d6;
   border-radius: 16px;
-  padding: 18px 18px 22px;
+  padding: 18px 18px 20px;
 }
 
 .chart-section h3 {
-  margin: 0 0 20px;
+  margin: 0 0 22px;
   color: #061936;
   font-size: 26px;
   font-weight: 900;
@@ -208,7 +214,7 @@ body {
 
 .chart-col {
   display: grid;
-  grid-template-rows: 115px 4px 78px 58px;
+  grid-template-rows: 115px 4px 90px 58px;
   text-align: center;
 }
 
@@ -217,7 +223,6 @@ body {
   position: relative;
   display: flex;
   justify-content: center;
-  width: 100%;
 }
 
 .positive-zone {
@@ -239,12 +244,12 @@ body {
 }
 
 .split-bar.positive {
-  background: #45ad45;
+  background: #ef3228;
   border-radius: 5px 5px 0 0;
 }
 
 .split-bar.negative {
-  background: #ef3228;
+  background: #45ad45;
   border-radius: 0 0 5px 5px;
 }
 
@@ -252,6 +257,7 @@ body {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
+  top: -24px;
   font-size: 14px;
   font-weight: 900;
   white-space: nowrap;
@@ -259,27 +265,24 @@ body {
 }
 
 .positive-text {
-  bottom: calc(100% + 8px);
-  color: #000;
+  color: #ef3228;
 }
 
 .negative-text {
-  top: calc(100% + 8px);
-  color: #ef3228;
+  color: #16833a;
 }
 
 .split-label {
   font-size: 9px;
   font-weight: 900;
   color: #061936;
-  margin-top: 30px;
+  margin-top: 32px;
   transform: rotate(-28deg);
   transform-origin: top center;
   line-height: 1;
   white-space: nowrap;
 }
 
-/* ONDERSTE WEG */
 .road-section {
   margin-top: 20px;
   padding: 20px;
