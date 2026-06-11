@@ -127,16 +127,31 @@ function App() {
     };
   }, [rows]);
 
-  const hasData = rows.length > 0;
-const isGood = hasData ? data.displayDifference < 0 : true;
+ const hasData = rows.length > 0;
 
-const leftSpeech = isGood
-  ? "Dat ging sneller dan gepland!"
-  : "Volgende week pakken we terug!";
+const isGood = hasData ? data.displayDifference < -100 : true;
+const isBad = hasData ? data.displayDifference > 100 : false;
 
-const rightSpeech = isGood
-  ? "Mooi resultaat team!"
-  : "Samen verbeteren we dit!";
+const leftSpeech =
+  isGood
+    ? "Dat ging sneller dan gepland!"
+    : isBad
+    ? "Waar kunnen we verbeteren?"
+    : "Vrijwel volgens planning!";
+
+const rightSpeech =
+  isGood
+    ? "Mooi resultaat team!"
+    : isBad
+    ? "Samen pakken we dit op!"
+    : "Prima week gedraaid!";
+
+const heroMessage =
+  isGood
+    ? "BETER GEPRESTEERD DAN DE NORM!"
+    : isBad
+    ? "AANDACHTSPUNT VOOR VOLGENDE WEEK"
+    : "VRIJWEL VOLGENS PLANNING";
   return (
     <div className="app">
       <div className="poster">
