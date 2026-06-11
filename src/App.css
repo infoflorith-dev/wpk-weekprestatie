@@ -382,3 +382,16 @@ body {
   padding: 18px 28px;
   border-radius: 12px;
 }
+.worker img {
+  width: 190px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+.trophy img {
+  width: 130px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
