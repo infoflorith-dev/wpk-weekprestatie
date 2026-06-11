@@ -264,15 +264,14 @@ body {
 }
 
 .positive-text {
-  top: -24px;
+  top: calc(100% + 8px);
   color: #16833a;
 }
 
 .negative-text {
-  top: 8px;
+  top: -22px;
   color: #ef3228;
 }
-
 .split-label {
   font-size: 9px;
   font-weight: 900;
