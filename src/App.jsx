@@ -157,7 +157,25 @@ function App() {
     <span>Uitvl</span>
   </div>
 </div>
+<div className="road-section">
+  <h2 className="road-title">SAMEN OP WEG NAAR TOPRESULTATEN!</h2>
 
+  <div className="road-track">
+    <div className="road-sign">
+      🏁
+      <div>NORM</div>
+    </div>
+
+    <div className="tractor">
+      🚜
+      <span>TEAM WPK</span>
+    </div>
+
+    <div className="road-result">
+      +412 UUR
+    </div>
+  </div>
+</div>
 </div>
 
 </div>
