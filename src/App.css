@@ -306,7 +306,7 @@ body {
 
 .chart-col {
   display: grid;
-  grid-template-rows: 120px 3px 95px 28px;
+  grid-template-rows: 115px 3px 85px 45px;
   align-items: end;
   text-align: center;
 }
@@ -324,6 +324,7 @@ body {
 
 .negative-zone {
   align-items: flex-start;
+  padding-top: 0;
 }
 
 .zero-line {
@@ -358,7 +359,7 @@ body {
 }
 
 .negative-text {
-  bottom: -22px;
+  bottom: -24px;
   color: #ef3228;
 }
 
@@ -366,5 +367,9 @@ body {
   font-size: 9px;
   font-weight: 900;
   color: #061936;
-  margin-top: 6px;
+  margin-top: 10px;
+  transform: rotate(-28deg);
+  transform-origin: top center;
+  line-height: 1;
+  white-space: nowrap;
 }
