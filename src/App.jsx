@@ -1,4 +1,3 @@
-import React from "react";
 function App() {
   return (
     <div className="app">
@@ -14,19 +13,41 @@ function App() {
         </div>
 
         <div className="hero">
-          <div className="worker">👨‍🌾</div>
+
+          <div className="worker-side">
+            <div className="speech">
+              Dat ging sneller dan gepland!
+            </div>
+
+            <div className="worker">
+              👨‍💼
+            </div>
+          </div>
 
           <div className="hero-center">
-            <p>TEAM WPK HEEFT DEZE WEEK</p>
+            <div className="hero-text">
+              TEAM WPK HEEFT DEZE WEEK
+            </div>
 
             <div className="score">
               +412 UUR
             </div>
 
-            <p>BETER GEPRESTEERD DAN DE NORM</p>
+            <div className="hero-text">
+              BETER GEPRESTEERD DAN DE NORM!
+            </div>
           </div>
 
-          <div className="worker">👩‍🌾</div>
+          <div className="worker-side">
+            <div className="speech">
+              Mooi resultaat team!
+            </div>
+
+            <div className="worker">
+              👩‍💼
+            </div>
+          </div>
+
         </div>
 
       </div>
