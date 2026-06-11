@@ -244,12 +244,12 @@ body {
 }
 
 .split-bar.positive {
-  background: #ef3228;
+  background: #45ad45;
   border-radius: 5px 5px 0 0;
 }
 
 .split-bar.negative {
-  background: #45ad45;
+  background: #ef3228;
   border-radius: 0 0 5px 5px;
 }
 
