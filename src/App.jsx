@@ -204,20 +204,7 @@ function App() {
               gridTemplateColumns: `repeat(${hasData ? data.chartData.length : 12}, 1fr)`,
             }}
           >
-            {(hasData ? data.chartData : [
-              { task: "Potplanten", difference: -76 },
-              { task: "WP", difference: -157 },
-              { task: "Kool", difference: -174 },
-              { task: "Clip/Stiek", difference: -21 },
-              { task: "Oppot", difference: -18 },
-              { task: "Omrijden", difference: -12 },
-              { task: "Machinaal", difference: 7 },
-              { task: "Toppen", difference: 18 },
-              { task: "Uitzetten", difference: 28 },
-              { task: "STNW", difference: 30 },
-              { task: "Extra", difference: 48 },
-              { task: "Uitvl", difference: 63 },
-            ]).map((item) => {
+        {data.chartData.map((item) => {
               const value = item.difference;
               const height = Math.min(Math.abs(value) * 0.75, 120);
 
