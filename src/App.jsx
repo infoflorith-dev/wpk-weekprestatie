@@ -166,9 +166,10 @@ function App() {
       <div>NORM</div>
     </div>
 
-   🚜🌱🌱🌱
-<span>TEAM WPK →</span>
-    </div>
+<div className="tractor">
+  🚜 🌱 🌱 🌱
+  <span>TEAM WPK →</span>
+</div>
 
     <div className="road-result">
       +412 UUR
