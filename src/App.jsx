@@ -171,9 +171,10 @@ function App() {
   <span>TEAM WPK →</span>
 </div>
 
-    <div className="road-result">
-      +412 UUR
-    </div>
+  <div className="road-result">
+  <div>+412 UUR</div>
+  <div>VOORSPRONG!</div>
+</div>
   </div>
 </div>
 </div>
