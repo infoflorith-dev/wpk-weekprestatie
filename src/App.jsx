@@ -77,6 +77,52 @@ function App() {
   </div>
 </div>
 
+<div className="top-section">
+
+  <div className="top-box green">
+    <h3>TOP 3 PRESTATIES</h3>
+
+    <div className="top-item">
+      <span>🥇 Afleveren WP</span>
+      <span>+157 uur</span>
+    </div>
+
+    <div className="top-item">
+      <span>🥈 Afleveren Kool</span>
+      <span>+174 uur</span>
+    </div>
+
+    <div className="top-item">
+      <span>🥉 Potplanten</span>
+      <span>+76 uur</span>
+    </div>
+  </div>
+
+  <div className="trophy">
+    🏆
+  </div>
+
+  <div className="top-box red">
+    <h3>TOP 3 AANDACHTSPUNTEN</h3>
+
+    <div className="top-item">
+      <span>1. STNW Uitvl</span>
+      <span>-63 uur</span>
+    </div>
+
+    <div className="top-item">
+      <span>2. Toppen op Iray</span>
+      <span>-18 uur</span>
+    </div>
+
+    <div className="top-item">
+      <span>3. Stokken Machinaal</span>
+      <span>-7 uur</span>
+    </div>
+  </div>
+
+</div>
+
 </div>
 
 </div>
