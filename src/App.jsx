@@ -272,7 +272,8 @@ const bad = normalRows
           >
         {data.chartData.map((item) => {
               const value = item.percentage;
-const height = Math.min(Math.abs(value) * 4, 120);
+const hourValue = item.difference;
+const height = Math.min(Math.abs(hourValue) * 0.75, 120);
 
               return (
                 <div className="chart-col" key={item.task}>
