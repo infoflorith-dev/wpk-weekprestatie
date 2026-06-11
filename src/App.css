@@ -214,11 +214,10 @@ body {
 }
 
 .chart-col {
-  width: 85px;
-  flex: 0 0 85px;
   display: grid;
   grid-template-rows: 115px 4px 95px 42px;
   text-align: center;
+  min-width: 70px;
 }
 
 .positive-zone,
@@ -226,6 +225,7 @@ body {
   position: relative;
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
 .positive-zone {
@@ -243,7 +243,10 @@ body {
 }
 
 .split-bar {
-  width: 70%;
+  width: 40px;
+  min-width: 40px;
+  max-width: 40px;
+  margin: 0 auto;
 }
 
 .split-bar.positive {
