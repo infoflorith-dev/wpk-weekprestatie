@@ -55,35 +55,59 @@ setDebugText("Excel wordt gelezen...");
 setDebugText(`${parsed.length} regels geladen uit ${file.name}`);
   };
 
-  const data = useMemo(() => {
-    const totalWorked = rows.reduce((sum, r) => sum + r.worked, 0);
-    const totalPlanned = rows.reduce((sum, r) => sum + r.planned, 0);
-    const totalDifference = rows.reduce((sum, r) => sum + r.difference, 0);
+ const data = useMemo(() => {
+  const normalRows = rows.filter(
+    (r) => r.task.toLowerCase() !== "total"
+  );
 
-    const savedHours = totalDifference < 0 ? Math.abs(totalDifference) : -totalDifference;
-    const realisation = totalPlanned > 0 ? (totalWorked / totalPlanned) * 100 : 0;
+  const totalRow = rows.find(
+    (r) => r.task.toLowerCase() === "total"
+  );
 
-    const good = rows
-      .filter((r) => r.difference < 0)
-      .sort((a, b) => a.difference - b.difference);
+  const totalWorked = totalRow
+    ? totalRow.worked
+    : normalRows.reduce((sum, r) => sum + r.worked, 0);
 
-    const bad = rows
-      .filter((r) => r.difference > 0)
-      .sort((a, b) => b.difference - a.difference);
+  const totalPlanned = totalRow
+    ? totalRow.planned
+    : normalRows.reduce((sum, r) => sum + r.planned, 0);
 
-    const chartData = [...good, ...bad];
+  const totalDifference = totalRow
+    ? totalRow.difference
+    : normalRows.reduce((sum, r) => sum + r.difference, 0);
 
-    return {
-      totalWorked,
-      totalPlanned,
-      totalDifference,
-      savedHours,
-      realisation,
-      good,
-      bad,
-      chartData,
-    };
-  }, [rows]);
+  const savedHours = totalDifference < 0
+    ? Math.abs(totalDifference)
+    : -totalDifference;
+
+  const realisation = totalPlanned > 0
+    ? (totalWorked / totalPlanned) * 100
+    : 0;
+
+  const good = normalRows
+    .filter((r) => r.difference < 0)
+    .sort((a, b) => a.difference - b.difference);
+
+  const bad = normalRows
+    .filter((r) => r.difference > 0)
+    .sort((a, b) => b.difference - a.difference);
+
+  const chartData = [
+    ...good.slice(0, 6),
+    ...bad.slice(0, 6),
+  ];
+
+  return {
+    totalWorked,
+    totalPlanned,
+    totalDifference,
+    savedHours,
+    realisation,
+    good,
+    bad,
+    chartData,
+  };
+}, [rows]);
 
   const hasData = rows.length > 0;
 
