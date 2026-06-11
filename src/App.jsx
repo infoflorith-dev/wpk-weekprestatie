@@ -1,6 +1,3 @@
-Ja. Vervang **heel `App.jsx`** door deze versie. Ik heb de dummy-data eruit gehaald: start = 0 en Top 3/grafiek leeg tot Excel upload. 
-
-```jsx
 import React, { useMemo, useState } from "react";
 import * as XLSX from "xlsx";
 
@@ -335,4 +332,3 @@ function App() {
 }
 
 export default App;
-```
