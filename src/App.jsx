@@ -34,7 +34,7 @@ function App() {
 
     const parsed = json
       .map((row) => {
-        const task = cleanTaskName(findColumn(row, "Task Nitea"));
+      const task = String(findColumn(row, "Task Nitea") || "").trim();
         const worked = toNumber(findColumn(row, "Hours worked"));
         const planned = toNumber(findColumn(row, "Realisation BC"));
         const difference = toNumber(findColumn(row, "Worked vs Realisation"));
