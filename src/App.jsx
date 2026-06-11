@@ -1,10 +1,12 @@
+Ja. Vervang **heel `App.jsx`** door deze versie. Ik heb de dummy-data eruit gehaald: start = 0 en Top 3/grafiek leeg tot Excel upload. 
+
+```jsx
 import React, { useMemo, useState } from "react";
 import * as XLSX from "xlsx";
 
 function App() {
- const [rows, setRows] = useState([]);
-const [fileName, setFileName] = useState("");
-const [debugText, setDebugText] = useState("Geen Excel geladen");
+  const [rows, setRows] = useState([]);
+  const [debugText, setDebugText] = useState("Geen Excel geladen");
 
   const cleanTaskName = (name) => {
     return String(name || "")
@@ -28,8 +30,9 @@ const [debugText, setDebugText] = useState("Geen Excel geladen");
   const handleExcelUpload = async (event) => {
     const file = event.target.files[0];
     if (!file) return;
-setFileName(file.name);
-setDebugText("Excel wordt gelezen...");
+
+    setDebugText("Excel wordt gelezen...");
+
     const data = await file.arrayBuffer();
     const workbook = XLSX.read(data);
     const sheet = workbook.Sheets[workbook.SheetNames[0]];
@@ -37,113 +40,95 @@ setDebugText("Excel wordt gelezen...");
 
     const parsed = json
       .map((row) => {
-   const task = cleanTaskName(findColumn(row, "Task Nitea"));
+        const task = cleanTaskName(findColumn(row, "Task Nitea"));
         const worked = toNumber(findColumn(row, "Hours worked"));
         const planned = toNumber(findColumn(row, "Realisation BC"));
         const difference = toNumber(findColumn(row, "Worked vs Realisation"));
 
-       const percentage =
-  planned !== 0
-    ? (difference / planned) * 100
-    : 0;
-
-return {
-  task,
-  worked,
-  planned,
-  difference,
-  percentage,
-};
+        return {
+          task,
+          worked,
+          planned,
+          difference,
+        };
       })
       .filter((row) => row.task && row.difference !== 0);
 
     setRows(parsed);
-setDebugText(`${parsed.length} regels geladen uit ${file.name}`);
+    setDebugText(`${parsed.length} regels geladen uit ${file.name}`);
   };
 
- const data = useMemo(() => {
-  const normalRowsRaw = rows.filter(
-  (r) => r.task.toLowerCase() !== "total"
-);
+  const data = useMemo(() => {
+    const normalRowsRaw = rows.filter(
+      (r) => r.task.toLowerCase() !== "total"
+    );
 
-const grouped = {};
+    const grouped = {};
 
-normalRowsRaw.forEach((row) => {
-  if (!grouped[row.task]) {
-    grouped[row.task] = {
-      task: row.task,
-      worked: 0,
-      planned: 0,
-      difference: 0,
-      percentage: 0,
+    normalRowsRaw.forEach((row) => {
+      if (!grouped[row.task]) {
+        grouped[row.task] = {
+          task: row.task,
+          worked: 0,
+          planned: 0,
+          difference: 0,
+          percentage: 0,
+        };
+      }
+
+      grouped[row.task].worked += row.worked;
+      grouped[row.task].planned += row.planned;
+    });
+
+    const normalRows = Object.values(grouped).map((row) => {
+      const difference = row.worked - row.planned;
+      const percentage =
+        row.planned !== 0 ? (difference / row.planned) * 100 : 0;
+
+      return {
+        ...row,
+        difference,
+        percentage,
+      };
+    });
+
+    const totalRow = rows.find((r) => r.task.toLowerCase() === "total");
+
+    const totalWorked = totalRow
+      ? totalRow.worked
+      : normalRows.reduce((sum, r) => sum + r.worked, 0);
+
+    const totalPlanned = totalRow
+      ? totalRow.planned
+      : normalRows.reduce((sum, r) => sum + r.planned, 0);
+
+    const displayDifference = totalWorked - totalPlanned;
+
+    const realisation =
+      totalPlanned > 0 ? (totalWorked / totalPlanned) * 100 : 0;
+
+    const rankedRows = normalRows.filter((r) => r.planned >= 10);
+
+    const good = rankedRows
+      .filter((r) => r.percentage < 0)
+      .sort((a, b) => a.percentage - b.percentage);
+
+    const bad = rankedRows
+      .filter((r) => r.percentage > 0)
+      .sort((a, b) => b.percentage - a.percentage);
+
+    const chartData = [...good.slice(0, 5), ...bad.slice(0, 5)];
+
+    return {
+      totalWorked,
+      totalPlanned,
+      displayDifference,
+      realisation,
+      good,
+      bad,
+      chartData,
     };
-  }
-
-  grouped[row.task].worked += row.worked;
-  grouped[row.task].planned += row.planned;
-});
-
-const normalRows = Object.values(grouped).map((row) => {
-  const difference = row.worked - row.planned;
-  const percentage = row.planned !== 0
-    ? (difference / row.planned) * 100
-    : 0;
-
-  return {
-    ...row,
-    difference,
-    percentage,
-  };
-});
-
-  const totalRow = rows.find(
-    (r) => r.task.toLowerCase() === "total"
-  );
-
-  const totalWorked = totalRow
-    ? totalRow.worked
-    : normalRows.reduce((sum, r) => sum + r.worked, 0);
-
-  const totalPlanned = totalRow
-    ? totalRow.planned
-    : normalRows.reduce((sum, r) => sum + r.planned, 0);
-
-  const totalDifference = totalRow
-    ? totalRow.difference
-    : normalRows.reduce((sum, r) => sum + r.difference, 0);
-
-const displayDifference = totalWorked - totalPlanned;
-
-  const realisation = totalPlanned > 0
-    ? (totalWorked / totalPlanned) * 100
-    : 0;
-
- const rankedRows = normalRows.filter((r) => r.planned >= 10);
-
-const good = rankedRows
-  .filter((r) => r.percentage < 0)
-  .sort((a, b) => a.percentage - b.percentage);
-
-const bad = rankedRows
-  .filter((r) => r.percentage > 0)
-  .sort((a, b) => b.percentage - a.percentage);
-
- const chartData = [
-  ...good.slice(0, 5),
-  ...bad.slice(0, 5),
-];
-
-  return {
-    totalWorked,
-    totalPlanned,
-    totalDifference,
-    displayDifference,
-    realisation,
-    good,
-    bad,
-    chartData,
-  };
-}, [rows]);
+  }, [rows]);
 
   const hasData = rows.length > 0;
 
@@ -165,13 +150,20 @@ const bad = rankedRows
           </label>
 
           <button>📄 PDF downloaden</button>
-       </div>
+        </div>
 
-<div style={{ fontSize: "12px", fontWeight: 700, color: "#0b376a", marginBottom: "8px" }}>
-  {debugText}
-</div>
+        <div
+          style={{
+            fontSize: "12px",
+            fontWeight: 700,
+            color: "#0b376a",
+            marginBottom: "8px",
+          }}
+        >
+          {debugText}
+        </div>
 
-<div className="hero">
+        <div className="hero">
           <div className="worker-side">
             <div className="speech">Dat ging sneller dan gepland!</div>
             <div className="worker">👨‍💼</div>
@@ -181,7 +173,7 @@ const bad = rankedRows
             <div className="hero-text">TEAM WPK HEEFT DEZE WEEK</div>
 
             <div className="score">
-              {hasData ? `${data.displayDifference.toFixed(0)} UUR` : "-412 UUR"}
+              {hasData ? `${data.displayDifference.toFixed(0)} UUR` : "0 UUR"}
             </div>
 
             <div className="hero-text">BETER GEPRESTEERD DAN DE NORM!</div>
@@ -197,7 +189,7 @@ const bad = rankedRows
           <div className="stat-card">
             <div className="stat-title">UREN VOLGENS NORM</div>
             <div className="stat-value">
-              {hasData ? data.totalPlanned.toFixed(0) : "3894"}
+              {hasData ? data.totalPlanned.toFixed(0) : "0"}
             </div>
             <div className="stat-unit">uur</div>
           </div>
@@ -205,7 +197,7 @@ const bad = rankedRows
           <div className="stat-card">
             <div className="stat-title">WERKELIJK GEWERKT</div>
             <div className="stat-value green">
-              {hasData ? data.totalWorked.toFixed(0) : "3482"}
+              {hasData ? data.totalWorked.toFixed(0) : "0"}
             </div>
             <div className="stat-unit">uur</div>
           </div>
@@ -213,7 +205,7 @@ const bad = rankedRows
           <div className="stat-card">
             <div className="stat-title">VERSCHIL</div>
             <div className="stat-value green">
-              {hasData ? data.displayDifference.toFixed(0) : "-412"}
+              {hasData ? data.displayDifference.toFixed(0) : "0"}
             </div>
             <div className="stat-unit">uur</div>
           </div>
@@ -221,7 +213,7 @@ const bad = rankedRows
           <div className="stat-card">
             <div className="stat-title">REALISATIE</div>
             <div className="stat-value">
-              {hasData ? `${data.realisation.toFixed(0)}%` : "89%"}
+              {hasData ? `${data.realisation.toFixed(0)}%` : "0%"}
             </div>
             <div className="stat-unit">t.o.v. norm</div>
           </div>
@@ -231,13 +223,11 @@ const bad = rankedRows
           <div className="top-box green">
             <h3>TOP 3 PRESTATIES</h3>
 
-            {(hasData ? data.good.slice(0, 3) : [
-              { task: "AFLEVEREN WP", difference: -157 },
-              { task: "AFLEVEREN KOOL", difference: -174 },
-              { task: "POTPLANTEN", difference: -76 },
-            ]).map((item, index) => (
+            {(hasData ? data.good.slice(0, 3) : []).map((item, index) => (
               <div className="top-item" key={item.task}>
-                <span>{["🥇", "🥈", "🥉"][index]} {item.task}</span>
+                <span>
+                  {["🥇", "🥈", "🥉"][index]} {item.task}
+                </span>
                 <span>{item.difference.toFixed(0)} uur</span>
               </div>
             ))}
@@ -248,13 +238,11 @@ const bad = rankedRows
           <div className="top-box red">
             <h3>TOP 3 AANDACHTSPUNTEN</h3>
 
-            {(hasData ? data.bad.slice(0, 3) : [
-              { task: "STNW UITVL", difference: 63 },
-              { task: "TOPPEN OP IRAY", difference: 18 },
-              { task: "STOKKEN MACHINAAL", difference: 7 },
-            ]).map((item, index) => (
+            {(hasData ? data.bad.slice(0, 3) : []).map((item, index) => (
               <div className="top-item" key={item.task}>
-                <span>{index + 1}. {item.task}</span>
+                <span>
+                  {index + 1}. {item.task}
+                </span>
                 <span>+{item.difference.toFixed(0)} uur</span>
               </div>
             ))}
@@ -269,50 +257,53 @@ const bad = rankedRows
           <div
             className="split-chart"
             style={{
-              gridTemplateColumns: `repeat(${hasData ? data.chartData.length : 12}, 1fr)`,
+              gridTemplateColumns: `repeat(${
+                hasData ? data.chartData.length : 10
+              }, 1fr)`,
             }}
           >
-        {data.chartData.map((item) => {
-              const value = item.percentage;
-const hourValue = item.difference;
-const height = Math.min(Math.abs(hourValue) * 0.75, 120);
+            {hasData &&
+              data.chartData.map((item) => {
+                const value = item.percentage;
+                const hourValue = item.difference;
+                const height = Math.min(Math.abs(hourValue) * 0.75, 120);
 
-              return (
-                <div className="chart-col" key={item.task}>
-                  <div className="positive-zone">
-                    {value < 0 && (
-                      <>
-                        <div
-                          className="split-bar positive"
-                          style={{ height: `${height}px` }}
-                        />
-                        <span className="bar-value positive-text">
-                          {value.toFixed(1)}%
-                        </span>
-                      </>
-                    )}
+                return (
+                  <div className="chart-col" key={item.task}>
+                    <div className="positive-zone">
+                      {value < 0 && (
+                        <>
+                          <div
+                            className="split-bar positive"
+                            style={{ height: `${height}px` }}
+                          />
+                          <span className="bar-value positive-text">
+                            {value.toFixed(1)}%
+                          </span>
+                        </>
+                      )}
+                    </div>
+
+                    <div className="zero-line"></div>
+
+                    <div className="negative-zone">
+                      {value > 0 && (
+                        <>
+                          <span className="bar-value negative-text">
+                            +{value.toFixed(1)}%
+                          </span>
+                          <div
+                            className="split-bar negative"
+                            style={{ height: `${height}px` }}
+                          />
+                        </>
+                      )}
+                    </div>
+
+                    <div className="split-label">{item.task}</div>
                   </div>
-
-                  <div className="zero-line"></div>
-
-                  <div className="negative-zone">
-                    {value > 0 && (
-                      <>
-                        <span className="bar-value negative-text">
-                         +{value.toFixed(1)}%
-                        </span>
-                        <div
-                          className="split-bar negative"
-                          style={{ height: `${height}px` }}
-                        />
-                      </>
-                    )}
-                  </div>
-
-                  <div className="split-label">{item.task}</div>
-                </div>
-              );
-            })}
+                );
+              })}
           </div>
         </div>
 
@@ -331,7 +322,9 @@ const height = Math.min(Math.abs(hourValue) * 0.75, 120);
             </div>
 
             <div className="road-result">
-             <div>{hasData ? `${data.displayDifference.toFixed(0)} UUR` : "-412 UUR"}</div>
+              <div>
+                {hasData ? `${data.displayDifference.toFixed(0)} UUR` : "0 UUR"}
+              </div>
               <div>VOORSPRONG!</div>
             </div>
           </div>
@@ -342,3 +335,4 @@ const height = Math.min(Math.abs(hourValue) * 0.75, 120);
 }
 
 export default App;
+```
