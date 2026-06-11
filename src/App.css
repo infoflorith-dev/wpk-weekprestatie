@@ -181,11 +181,11 @@ body {
   margin-top: 14px;
   border: 2px solid #9eb8d6;
   border-radius: 16px;
-  padding: 14px 18px 18px;
+  padding: 18px 18px 24px;
 }
 
 .chart-section h3 {
-  margin: 0 0 12px;
+  margin: 0 0 18px;
   color: #061936;
   font-size: 26px;
   font-weight: 900;
@@ -195,108 +195,6 @@ body {
   font-size: 16px;
 }
 
-.bar-chart {
-  height: 170px;
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  gap: 12px;
-  align-items: end;
-  border-bottom: 3px solid #061936;
-  padding: 0 10px;
-}
-
-.bar {
-  position: relative;
-  width: 100%;
-  border-radius: 4px 4px 0 0;
-}
-
-.bar span {
-  position: absolute;
-  top: -24px;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 14px;
-  font-weight: 900;
-}
-
-.bar.positive {
-  background: #45ad45;
-}
-
-.bar.negative {
-  background: #ef3228;
-}
-
-.bar.negative span {
-  color: #ef3228;
-}
-
-.chart-labels {
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  gap: 8px;
-  margin-top: 8px;
-  font-size: 9px;
-  font-weight: 900;
-  color: #061936;
-}
-.road-section {
-  margin-top: 20px;
-  padding: 20px;
-  border: 2px solid #9eb8d6;
-  border-radius: 16px;
-}
-
-.road-title {
-  text-align: center;
-  color: #0b376a;
-  font-size: 28px;
-  font-weight: 900;
-  margin-bottom: 25px;
-}
-
-.road-track {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.road-sign {
-  text-align: center;
-  font-size: 40px;
-  font-weight: 900;
-  color: #0b376a;
-}
-
-.road-sign div {
-  font-size: 20px;
-}
-
-.tractor {
-  font-size: 60px;
-  text-align: center;
-  color: #1c8c3a;
-}
-
-.tractor span {
-  display: block;
-  font-size: 22px;
-  font-weight: 900;
-  color: white;
-  background: #1c8c3a;
-  padding: 6px 20px;
-  border-radius: 20px;
-}
-
-.road-result {
-  background: #45ad45;
-  color: white;
-  font-size: 34px;
-  font-weight: 900;
-  padding: 18px 28px;
-  border-radius: 12px;
-}
 .split-chart {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
@@ -306,8 +204,7 @@ body {
 
 .chart-col {
   display: grid;
-  grid-template-rows: 105px 3px 105px 42px;
-  align-items: stretch;
+  grid-template-rows: 115px 4px 95px 42px;
   text-align: center;
 }
 
@@ -316,7 +213,6 @@ body {
   position: relative;
   display: flex;
   justify-content: center;
-  height: 100%;
 }
 
 .positive-zone {
@@ -329,17 +225,17 @@ body {
 
 .zero-line {
   background: #061936;
-  height: 3px;
+  height: 4px;
   width: 100%;
 }
 
 .split-bar {
   width: 80%;
-  border-radius: 4px 4px 0 0;
 }
 
 .split-bar.positive {
   background: #45ad45;
+  border-radius: 4px 4px 0 0;
 }
 
 .split-bar.negative {
@@ -349,10 +245,10 @@ body {
 
 .bar-value {
   position: absolute;
-  font-size: 14px;
-  font-weight: 900;
   left: 50%;
   transform: translateX(-50%);
+  font-size: 14px;
+  font-weight: 900;
   white-space: nowrap;
 }
 
@@ -362,7 +258,7 @@ body {
 }
 
 .negative-text {
-  top: calc(100% + 6px);
+  top: calc(100% + 4px);
   color: #ef3228;
 }
 
