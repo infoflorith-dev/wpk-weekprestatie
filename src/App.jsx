@@ -42,12 +42,18 @@ setDebugText("Excel wordt gelezen...");
         const planned = toNumber(findColumn(row, "Realisation BC"));
         const difference = toNumber(findColumn(row, "Worked vs Realisation"));
 
-        return {
-          task,
-          worked,
-          planned,
-          difference,
-        };
+       const percentage =
+  planned !== 0
+    ? (difference / planned) * 100
+    : 0;
+
+return {
+  task,
+  worked,
+  planned,
+  difference,
+  percentage,
+};
       })
       .filter((row) => row.task && row.difference !== 0);
 
@@ -82,13 +88,13 @@ const displayDifference = totalWorked - totalPlanned;
     ? (totalWorked / totalPlanned) * 100
     : 0;
 
-  const good = normalRows
-    .filter((r) => r.difference < 0)
-    .sort((a, b) => a.difference - b.difference);
+ const good = normalRows
+  .filter((r) => r.percentage < 0)
+  .sort((a, b) => a.percentage - b.percentage);
 
-  const bad = normalRows
-    .filter((r) => r.difference > 0)
-    .sort((a, b) => b.difference - a.difference);
+const bad = normalRows
+  .filter((r) => r.percentage > 0)
+  .sort((a, b) => b.percentage - a.percentage);
 
  const chartData = [
   ...good.slice(0, 5),
@@ -235,8 +241,8 @@ const displayDifference = totalWorked - totalPlanned;
             }}
           >
         {data.chartData.map((item) => {
-              const value = item.difference;
-              const height = Math.min(Math.abs(value) * 0.75, 120);
+              const value = item.percentage;
+const height = Math.min(Math.abs(value) * 4, 120);
 
               return (
                 <div className="chart-col" key={item.task}>
@@ -248,7 +254,7 @@ const displayDifference = totalWorked - totalPlanned;
                           style={{ height: `${height}px` }}
                         />
                         <span className="bar-value positive-text">
-                          {value.toFixed(0)}
+                          {value.toFixed(1)}%
                         </span>
                       </>
                     )}
@@ -260,7 +266,7 @@ const displayDifference = totalWorked - totalPlanned;
                     {value > 0 && (
                       <>
                         <span className="bar-value negative-text">
-                          +{value.toFixed(0)}
+                         +{value.toFixed(1)}%
                         </span>
                         <div
                           className="split-bar negative"
