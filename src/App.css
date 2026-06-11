@@ -122,3 +122,58 @@ body {
   font-weight: 700;
   color: #0b376a;
 }
+.top-section {
+  margin-top: 14px;
+  border: 2px solid #9eb8d6;
+  border-radius: 16px;
+  padding: 18px 18px 14px;
+  display: grid;
+  grid-template-columns: 1fr 160px 1fr;
+  gap: 18px;
+  align-items: center;
+}
+
+.top-box {
+  text-align: left;
+}
+
+.top-box h3 {
+  margin: 0 0 16px;
+  color: white;
+  font-size: 20px;
+  font-weight: 900;
+  text-align: center;
+  padding: 8px 12px;
+  border-radius: 8px;
+}
+
+.top-box.green h3 {
+  background: #16833a;
+}
+
+.top-box.red h3 {
+  background: #d71920;
+}
+
+.top-item {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 9px 4px;
+  border-bottom: 1px solid #d8e1ec;
+  font-size: 17px;
+  font-weight: 800;
+}
+
+.top-box.green .top-item span:last-child {
+  color: #16833a;
+}
+
+.top-box.red .top-item span:last-child {
+  color: #d71920;
+}
+
+.trophy {
+  font-size: 95px;
+  text-align: center;
+}
