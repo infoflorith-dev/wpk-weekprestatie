@@ -163,7 +163,9 @@ function App() {
         <div className="hero">
           <div className="worker-side">
             <div className="speech">Dat ging sneller dan gepland!</div>
-            <div className="worker">👨‍💼</div>
+          <div className="worker">
+  <img src="/images/man.png" alt="Man" />
+</div>
           </div>
 
           <div className="hero-center">
@@ -178,7 +180,9 @@ function App() {
 
           <div className="worker-side">
             <div className="speech">Mooi resultaat team!</div>
-            <div className="worker">👩‍💼</div>
+           <div className="worker">
+  <img src="/images/vrouw.png" alt="Vrouw" />
+</div>
           </div>
         </div>
 
@@ -230,7 +234,9 @@ function App() {
             ))}
           </div>
 
-          <div className="trophy">🏆</div>
+         <div className="trophy">
+  <img src="/images/trophy.png" alt="Trofee" />
+</div>
 
           <div className="top-box red">
             <h3>TOP 3 AANDACHTSPUNTEN</h3>
