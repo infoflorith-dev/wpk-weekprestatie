@@ -206,15 +206,18 @@ body {
 }
 
 .split-chart {
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  gap: 9px;
-  margin-top: 4px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 8px;
+  margin-top: 10px;
 }
 
 .chart-col {
+  width: 85px;
+  flex: 0 0 85px;
   display: grid;
-  grid-template-rows: 115px 4px 90px 58px;
+  grid-template-rows: 115px 4px 95px 42px;
   text-align: center;
 }
 
@@ -240,7 +243,7 @@ body {
 }
 
 .split-bar {
-  width: 82%;
+  width: 70%;
 }
 
 .split-bar.positive {
