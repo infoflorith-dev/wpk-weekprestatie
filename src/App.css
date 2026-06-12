@@ -543,3 +543,10 @@ right: 25px;
   color: white;
   font-size: 18px;
 }
+.tractor-result-board.board-green {
+  background: #0d8f2f;
+}
+
+.tractor-result-board.board-red {
+  background: #d71920;
+}
