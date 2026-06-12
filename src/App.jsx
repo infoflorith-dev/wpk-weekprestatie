@@ -126,8 +126,10 @@ const data = useMemo(() => {
 
   const displayDifference = totalWorked - totalPlanned;
 
-  const realisation =
-    totalPlanned > 0 ? (totalWorked / totalPlanned) * 100 : 0;
+const realisation =
+  totalPlanned > 0
+    ? ((totalWorked - totalPlanned) / totalPlanned) * 100
+    : 0;
 
   const rankedRows = normalRows.filter((r) => r.planned >= 10);
 
@@ -273,9 +275,13 @@ const heroResult =
           <div className="stat-card">
             <div className="stat-title">REALISATIE</div>
             <div className="stat-value">
-              {hasData ? `${data.realisation.toFixed(0)}%` : "0%"}
+             {hasData
+  ? `${Math.abs(data.realisation).toFixed(0)}%`
+  : "0%"}
             </div>
-            <div className="stat-unit">t.o.v. norm</div>
+           <div className="stat-unit">
+  {data.realisation < 0 ? "onder norm" : "boven norm"}
+</div>
           </div>
         </div>
 
