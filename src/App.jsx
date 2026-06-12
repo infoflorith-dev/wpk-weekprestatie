@@ -354,8 +354,7 @@ const heroResult =
     className="tractor-banner"
   />
 </div>
-          </div>
-        </div>
+               </div>
       </div>
     </div>
   );
