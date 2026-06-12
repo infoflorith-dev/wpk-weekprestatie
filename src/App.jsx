@@ -189,7 +189,7 @@ const heroResult =
     <div className="app">
       <div className="poster">
         <h1 className="title">WEEKPRESTATIE</h1>
-        <h2 className="week">WEEK {data.weekNumber || "-"}</h2>
+      <h2 className="week">WEEK {getWeekNumber(new Date())}</h2>
 
         <div className="buttons">
           <label>
