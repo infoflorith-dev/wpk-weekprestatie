@@ -446,3 +446,9 @@ body {
   color: #9be04d;
   line-height: 0.9;
 }
+.tractor-banner {
+  width: 100%;
+  max-width: 1000px;
+  display: block;
+  margin: 0 auto;
+}
