@@ -39,101 +39,115 @@ function App() {
 
     setDebugText("Excel wordt gelezen...");
 
-    const data = await file.arrayBuffer();
-    const workbook = XLSX.read(data);
-    const sheet = workbook.Sheets[workbook.SheetNames[0]];
-    const json = XLSX.utils.sheet_to_json(sheet);
+   const data = await file.arrayBuffer();
+const workbook = XLSX.read(data, { cellDates: true });
+const sheet = workbook.Sheets[workbook.SheetNames[0]];
+const json = XLSX.utils.sheet_to_json(sheet);
 
-    const parsed = json
-      .map((row) => {
-        const task = cleanTaskName(findColumn(row, "Task Nitea"));
-        const worked = toNumber(findColumn(row, "Hours worked"));
-        const planned = toNumber(findColumn(row, "Realisation BC"));
-        const difference = toNumber(findColumn(row, "Worked vs Realisation"));
+const parsed = json
+  .map((row) => {
+    const task = cleanTaskName(findColumn(row, "Task Nitea"));
+    const worked = toNumber(findColumn(row, "Hours worked"));
+    const planned = toNumber(findColumn(row, "Realisation BC"));
+    const difference = toNumber(findColumn(row, "Worked vs Realisation"));
 
-        return {
-          task,
-          worked,
-          planned,
-          difference,
-        };
-      })
-      .filter((row) => row.task && row.difference !== 0);
-
-    setRows(parsed);
-    setDebugText(`${parsed.length} regels geladen uit ${file.name}`);
-  };
-
-  const data = useMemo(() => {
-    const normalRowsRaw = rows.filter(
-      (r) => r.task.toLowerCase() !== "total"
-    );
-
-    const grouped = {};
-
-    normalRowsRaw.forEach((row) => {
-      if (!grouped[row.task]) {
-        grouped[row.task] = {
-          task: row.task,
-          worked: 0,
-          planned: 0,
-          difference: 0,
-          percentage: 0,
-        };
-      }
-
-      grouped[row.task].worked += row.worked;
-      grouped[row.task].planned += row.planned;
-    });
-
-    const normalRows = Object.values(grouped).map((row) => {
-      const difference = row.worked - row.planned;
-      const percentage =
-        row.planned !== 0 ? (difference / row.planned) * 100 : 0;
-
-      return {
-        ...row,
-        difference,
-        percentage,
-      };
-    });
-
-    const totalRow = rows.find((r) => r.task.toLowerCase() === "total");
-
-    const totalWorked = totalRow
-      ? totalRow.worked
-      : normalRows.reduce((sum, r) => sum + r.worked, 0);
-
-    const totalPlanned = totalRow
-      ? totalRow.planned
-      : normalRows.reduce((sum, r) => sum + r.planned, 0);
-
-    const displayDifference = totalWorked - totalPlanned;
-
-    const realisation =
-      totalPlanned > 0 ? (totalWorked / totalPlanned) * 100 : 0;
-
-    const rankedRows = normalRows.filter((r) => r.planned >= 10);
-
-    const good = rankedRows
-      .filter((r) => r.percentage < 0)
-      .sort((a, b) => a.percentage - b.percentage);
-
-    const bad = rankedRows
-      .filter((r) => r.percentage > 0)
-      .sort((a, b) => b.percentage - a.percentage);
-
-    const chartData = [...good.slice(0, 5), ...bad.slice(0, 5)];
+    const dateValue =
+      findColumn(row, "Date") ||
+      findColumn(row, "Datum") ||
+      findColumn(row, "Week date") ||
+      Object.values(row).find((value) => value instanceof Date);
 
     return {
-      totalWorked,
-      totalPlanned,
-      displayDifference,
-      realisation,
-      good,
-      bad,
-      chartData,
+      task,
+      worked,
+      planned,
+      difference,
+      dateValue,
     };
+  })
+  .filter((row) => row.task && row.difference !== 0);
+
+setRows(parsed);
+setDebugText(`${parsed.length} regels geladen uit ${file.name}`);
+};
+
+const data = useMemo(() => {
+  const normalRowsRaw = rows.filter(
+    (r) => r.task.toLowerCase() !== "total"
+  );
+
+  const firstDateRow = rows.find((r) => r.dateValue instanceof Date);
+  const weekNumber = firstDateRow
+    ? getWeekNumber(firstDateRow.dateValue)
+    : null;
+
+  const grouped = {};
+
+  normalRowsRaw.forEach((row) => {
+    if (!grouped[row.task]) {
+      grouped[row.task] = {
+        task: row.task,
+        worked: 0,
+        planned: 0,
+        difference: 0,
+        percentage: 0,
+      };
+    }
+
+    grouped[row.task].worked += row.worked;
+    grouped[row.task].planned += row.planned;
+  });
+
+  const normalRows = Object.values(grouped).map((row) => {
+    const difference = row.worked - row.planned;
+    const percentage =
+      row.planned !== 0 ? (difference / row.planned) * 100 : 0;
+
+    return {
+      ...row,
+      difference,
+      percentage,
+    };
+  });
+
+  const totalRow = rows.find((r) => r.task.toLowerCase() === "total");
+
+  const totalWorked = totalRow
+    ? totalRow.worked
+    : normalRows.reduce((sum, r) => sum + r.worked, 0);
+
+  const totalPlanned = totalRow
+    ? totalRow.planned
+    : normalRows.reduce((sum, r) => sum + r.planned, 0);
+
+  const displayDifference = totalWorked - totalPlanned;
+
+  const realisation =
+    totalPlanned > 0 ? (totalWorked / totalPlanned) * 100 : 0;
+
+  const rankedRows = normalRows.filter((r) => r.planned >= 10);
+
+  const good = rankedRows
+    .filter((r) => r.percentage < 0)
+    .sort((a, b) => a.percentage - b.percentage);
+
+  const bad = rankedRows
+    .filter((r) => r.percentage > 0)
+    .sort((a, b) => b.percentage - a.percentage);
+
+  const chartData = [...good.slice(0, 5), ...bad.slice(0, 5)];
+
+  return {
+    totalWorked,
+    totalPlanned,
+    displayDifference,
+    realisation,
+    good,
+    bad,
+    chartData,
+    weekNumber,
+  };
+}, [rows]);
   }, [rows]);
 
  const hasData = rows.length > 0;
@@ -175,7 +189,7 @@ const heroResult =
     <div className="app">
       <div className="poster">
         <h1 className="title">WEEKPRESTATIE</h1>
-        <h2 className="week">WEEK {getWeekNumber(new Date())}</h2>
+        <h2 className="week">WEEK {data.weekNumber || "-"}</h2>
 
         <div className="buttons">
           <label>
