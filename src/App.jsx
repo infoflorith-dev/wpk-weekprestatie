@@ -348,22 +348,12 @@ const heroResult =
           <h2 className="road-title">SAMEN OP WEG NAAR TOPRESULTATEN!</h2>
 
           <div className="road-track">
-            <div className="road-sign">
-              🏁
-              <div>NORM</div>
-            </div>
-
-            <div className="tractor">
-              🚜 🌱 🌱 🌱
-              <span>TEAM WPK →</span>
-            </div>
-
-            <div className="road-result">
-              <div>
-                {hasData ? `${data.displayDifference.toFixed(0)} UUR` : "0 UUR"}
-              </div>
-              <div>VOORSPRONG!</div>
-            </div>
+  <img
+    src="/images/tractor.png"
+    alt="Team WPK Tractor"
+    className="tractor-banner"
+  />
+</div>
           </div>
         </div>
       </div>
