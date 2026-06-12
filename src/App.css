@@ -453,64 +453,40 @@ body {
   margin: 0 auto;
   border-radius: 12px;
 }
-/* EXTRA COMPACT VOOR 1 A4 */
-.title {
-  font-size: 54px;
-}
-
-.week {
-  font-size: 30px;
-  margin-bottom: 8px;
-}
-
-.hero {
-  grid-template-columns: 175px 1fr 175px;
-}
-
-.worker img {
-  width: 150px;
-}
-
-.hero-center {
-  padding: 18px;
-}
-
-.score {
-  font-size: 54px;
-}
-
-.score-unit {
-  font-size: 42px;
-}
-
-.stat-card {
-  min-height: 76px;
-  padding: 8px 6px;
-}
-
-.top-section {
-  padding: 10px 14px;
-}
-
+/* HERSTEL GRAFIEK - NIET TE PLAT */
 .chart-section {
-  padding: 10px 14px 8px;
+  padding: 14px 16px 18px;
+}
+
+.chart-section h3 {
+  font-size: 24px;
+  margin-bottom: 18px;
 }
 
 .chart-col {
-  grid-template-rows: 58px 4px 48px 28px;
+  grid-template-rows: 92px 4px 78px 46px;
 }
 
-.road-section {
-  padding: 10px 14px;
+.split-bar {
+  width: 36px;
+  min-width: 36px;
+  max-width: 36px;
 }
 
-.road-title {
-  font-size: 22px;
-  margin-bottom: 8px;
+.split-label {
+  font-size: 8px;
+  margin-top: 10px;
+  transform: rotate(-32deg);
 }
 
-.tractor-banner {
-  max-height: 310px;
-  width: auto;
-  max-width: 100%;
+.bar-value {
+  font-size: 13px;
+}
+
+.positive-text {
+  top: calc(100% + 7px);
+}
+
+.negative-text {
+  top: -20px;
 }
