@@ -369,17 +369,22 @@ const heroResult =
           </div>
         </div>
 
-        <div className="road-section">
-          <h2 className="road-title">SAMEN OP WEG NAAR TOPRESULTATEN!</h2>
+       <div className="road-section">
+  <h2 className="road-title">SAMEN OP WEG NAAR TOPRESULTATEN!</h2>
 
-          <div className="road-track">
-  <img
-    src="/images/tractor.png"
-    alt="Team WPK Tractor"
-    className="tractor-banner"
-  />
+  <div className="road-track">
+    <img
+      src="/images/tractor.png"
+      alt="Team WPK Tractor"
+      className="tractor-banner"
+    />
+
+    <div className="tractor-result-board">
+      <div>{heroHours} UUR</div>
+      <span>{heroResult}</span>
+    </div>
+  </div>
 </div>
-               </div>
       </div>
     </div>
   );
