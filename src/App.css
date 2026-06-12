@@ -457,29 +457,30 @@ body {
 @media print {
   @page {
     size: A4 portrait;
-    margin: 0;
+    margin: 5mm;
   }
 
   html,
   body {
-    width: 210mm;
-    height: 297mm;
     background: white;
-    overflow: hidden;
+    margin: 0;
+    padding: 0;
   }
 
   .app {
     padding: 0;
-    min-height: auto;
-    display: flex;
-    justify-content: center;
+    display: block;
   }
 
   .poster {
-    transform: scale(0.62);
-    transform-origin: top center;
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    padding: 10px;
     box-shadow: none;
-    margin: 0 auto;
+    border: 1px solid #9aa7b5;
+
+    zoom: 72%;
   }
 
   .buttons {
