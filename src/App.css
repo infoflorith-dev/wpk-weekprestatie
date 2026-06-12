@@ -345,7 +345,7 @@ body {
   display: flex;
   justify-content: center;
   overflow: hidden;
-  max-height: 180px;
+  max-height: 200px;
 }
 
 .road-sign {
