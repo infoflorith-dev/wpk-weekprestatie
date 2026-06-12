@@ -457,30 +457,43 @@ body {
 @media print {
   @page {
     size: A4 portrait;
-    margin: 5mm;
+    margin: 4mm;
   }
 
   html,
   body {
-    background: white;
     margin: 0;
     padding: 0;
+    background: white;
+    width: 210mm;
+    height: 297mm;
+    overflow: hidden;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  * {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
   }
 
   .app {
     padding: 0;
-    display: block;
+    margin: 0;
+    min-height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    background: white;
   }
 
   .poster {
-    width: 100%;
-    max-width: none;
+    width: 980px;
     margin: 0;
-    padding: 10px;
+    padding: 18px 34px;
     box-shadow: none;
-    border: 1px solid #9aa7b5;
-
-    zoom: 72%;
+    transform: scale(0.56);
+    transform-origin: top center;
   }
 
   .buttons {
