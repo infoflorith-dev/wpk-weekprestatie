@@ -343,8 +343,9 @@ body {
 
 .road-track {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  justify-content: center;
+  overflow: hidden;
+  max-height: 180px;
 }
 
 .road-sign {
@@ -447,8 +448,7 @@ body {
   line-height: 0.9;
 }
 .tractor-banner {
-  width: 65%;
-  max-width: 600px;
+  width: 100%;
   display: block;
   margin: 0 auto;
 }
