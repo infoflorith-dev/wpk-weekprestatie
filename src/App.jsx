@@ -379,7 +379,7 @@ const heroResult =
       className="tractor-banner"
     />
 
-    <div className="tractor-result-board">
+   <div className={`tractor-result-board ${isGood ? "board-green" : "board-red"}`}>
       <div>{heroHours} UUR</div>
       <span>{heroResult}</span>
     </div>
