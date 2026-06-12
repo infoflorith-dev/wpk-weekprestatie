@@ -1,6 +1,15 @@
 import React, { useMemo, useState } from "react";
 import * as XLSX from "xlsx";
+function getWeekNumber(date) {
+  const d = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
+  const dayNum = d.getUTCDay() || 7;
 
+  d.setUTCDate(d.getUTCDate() + 4 - dayNum);
+
+  const yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1));
+
+  return Math.ceil((((d - yearStart) / 86400000) + 1) / 7);
+}
 function App() {
   const [rows, setRows] = useState([]);
   const [debugText, setDebugText] = useState("Geen Excel geladen");
@@ -166,7 +175,7 @@ const heroResult =
     <div className="app">
       <div className="poster">
         <h1 className="title">WEEKPRESTATIE</h1>
-        <h2 className="week">WEEK 23</h2>
+        <h2 className="week">WEEK {getWeekNumber(new Date())}</h2>
 
         <div className="buttons">
           <label>
