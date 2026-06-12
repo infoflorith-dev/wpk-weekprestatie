@@ -179,7 +179,7 @@ const heroResult =
             />
           </label>
 
-          <button>📄 PDF downloaden</button>
+         <button onClick={() => window.print()}>📄 PDF downloaden</button>
         </div>
 
         <div
