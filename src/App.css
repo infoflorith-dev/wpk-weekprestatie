@@ -454,3 +454,35 @@ body {
   margin: 0 auto;
   border-radius: 12px;
 }
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 0;
+  }
+
+  html,
+  body {
+    width: 210mm;
+    height: 297mm;
+    background: white;
+    overflow: hidden;
+  }
+
+  .app {
+    padding: 0;
+    min-height: auto;
+    display: flex;
+    justify-content: center;
+  }
+
+  .poster {
+    transform: scale(0.62);
+    transform-origin: top center;
+    box-shadow: none;
+    margin: 0 auto;
+  }
+
+  .buttons {
+    display: none;
+  }
+}
