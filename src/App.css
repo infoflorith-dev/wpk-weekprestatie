@@ -448,7 +448,8 @@ body {
 }
 .tractor-banner {
   width: 100%;
-  height: auto;
+  max-height: 420px;
+  object-fit: contain;
   display: block;
   margin: 0 auto;
   border-radius: 12px;
