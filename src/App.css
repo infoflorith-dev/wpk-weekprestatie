@@ -512,21 +512,34 @@ body {
 
 .tractor-result-board {
   position: absolute;
-  right: 78px;
-  top: 78px;
-  width: 170px;
-  text-align: center;
+
+  right: 56px;
+  top: 55px;
+
+  width: 235px;
+  height: 110px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  background: #0d8f2f;
+  border: 3px solid #ffffff;
+  border-radius: 12px;
+
   color: #9be04d;
   font-weight: 900;
-  font-size: 24px;
+  font-size: 34px;
   line-height: 1;
-  text-shadow: 0 2px 2px rgba(0,0,0,0.35);
+
+  box-sizing: border-box;
   pointer-events: none;
 }
 
 .tractor-result-board span {
   display: block;
-  margin-top: 8px;
+  margin-top: 6px;
   color: white;
-  font-size: 14px;
+  font-size: 18px;
 }
