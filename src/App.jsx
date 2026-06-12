@@ -10,10 +10,14 @@ function getWeekNumber(date) {
 
   return Math.ceil((((d - yearStart) / 86400000) + 1) / 7);
 }
+function getWeekFromFileName(fileName) {
+  const match = fileName.match(/wk\s*(\d+)/i);
+  return match ? Number(match[1]) : null;
+}
 function App() {
   const [rows, setRows] = useState([]);
   const [debugText, setDebugText] = useState("Geen Excel geladen");
-
+const [fileWeekNumber, setFileWeekNumber] = useState(null);
   const cleanTaskName = (name) => {
     return String(name || "")
       .replace(/^\s*\d+[\s.-]*/g, "")
@@ -36,7 +40,7 @@ function App() {
   const handleExcelUpload = async (event) => {
     const file = event.target.files[0];
     if (!file) return;
-
+setFileWeekNumber(getWeekFromFileName(file.name));
     setDebugText("Excel wordt gelezen...");
 
    const data = await file.arrayBuffer();
@@ -188,8 +192,7 @@ const heroResult =
     <div className="app">
       <div className="poster">
         <h1 className="title">WEEKPRESTATIE</h1>
-     <h2 className="week">WEEK {data.weekNumber || "-"}</h2>
-
+    <h2 className="week">WEEK {fileWeekNumber || "-"}</h2>
         <div className="buttons">
           <label>
             📊 Excel kiezen
