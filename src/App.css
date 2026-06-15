@@ -550,37 +550,3 @@ right: 25px;
 .tractor-result-board.board-red {
   background: #d71920;
 }
-@media print {
-  @page {
-    size: A4 portrait;
-    margin: 0;
-  }
-
-  html,
-  body {
-    margin: 0 !important;
-    padding: 0 !important;
-    background: white !important;
-  }
-
-  .buttons {
-    display: none !important;
-  }
-
-  .app {
-    margin: 0 !important;
-    padding: 0 !important;
-    display: block !important;
-    width: 100vw !important;
-    background: white !important;
-  }
-
-  .poster {
-    width: 100vw !important;
-    max-width: none !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    border: none !important;
-    box-shadow: none !important;
-  }
-}
