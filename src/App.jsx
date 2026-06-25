@@ -157,39 +157,32 @@ const realisation =
 
  const hasData = rows.length > 0;
 
-const isGood = hasData ? data.displayDifference < -100 : true;
-const isBad = hasData ? data.displayDifference > 100 : false;
+const isGood = hasData ? data.displayDifference <= 0 : true;
+const isBad = hasData ? data.displayDifference > 0 : false;
 
 const leftSpeech =
   isGood
     ? "Dat ging sneller dan gepland!"
-    : isBad
-    ? "Waar kunnen we verbeteren?"
-    : "Vrijwel volgens planning!";
+    : "Waar kunnen we verbeteren?";
 
 const rightSpeech =
   isGood
     ? "Mooi resultaat team!"
-    : isBad
-    ? "Samen pakken we dit op!"
-    : "Prima week gedraaid!";
+    : "Samen pakken we dit op!";
 
 const heroMessage =
   isGood
     ? "BETER GEPRESTEERD DAN DE NORM!"
-    : isBad
-    ? "AANDACHTSPUNT VOOR VOLGENDE WEEK"
-    : "VRIJWEL VOLGENS PLANNING";
-  const heroHours = hasData
+    : "AANDACHTSPUNT VOOR VOLGENDE WEEK";
+
+const heroHours = hasData
   ? Math.abs(data.displayDifference).toFixed(0)
   : "0";
 
 const heroResult =
   isGood
     ? "ONDER DE NORM"
-    : isBad
-    ? "BOVEN DE NORM"
-    : "ROND DE NORM";
+    : "BOVEN DE NORM";
   return (
     <div className="app">
       <div className="poster">
