@@ -500,7 +500,7 @@ body {
   padding: 18px 34px;
   box-shadow: none;
  transform: scale(0.82, 0.56);
-  transform-origin: top center;
+transform-origin: top left;
 }
   .buttons {
     display: none;
