@@ -501,7 +501,7 @@ body {
   box-shadow: none;
  transform: scale(0.82, 0.56);
 transform-origin: top left;
-  margin-left: 60px;
+  margin-left: 100px;
 }
   .buttons {
     display: none;
