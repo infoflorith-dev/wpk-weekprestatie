@@ -310,64 +310,57 @@ const heroResult =
           </div>
         </div>
 
-        <div className="chart-section">
-          <h3>
-            AFWIJKINGEN T.O.V. NORM <span>(in uren)</span>
-          </h3>
+      <div className="chart-section">
+  <h3>
+    PRESTATIES T.O.V. NORM <span>(in %)</span>
+  </h3>
 
-          <div
-            className="split-chart"
-            style={{
-              gridTemplateColumns: `repeat(${
-                hasData ? data.chartData.length : 10
-              }, 1fr)`,
-            }}
-          >
-            {hasData &&
-              data.chartData.map((item) => {
-                const value = item.percentage;
-                const hourValue = item.difference;
-                const height = Math.min(Math.abs(hourValue) * 0.75, 120);
+  <div className="horizontal-chart">
+    <div className="chart-list chart-list-good">
+      <div className="chart-list-title">🟢 BETER DAN NORM</div>
 
-                return (
-                  <div className="chart-col" key={item.task}>
-                    <div className="positive-zone">
-                      {value < 0 && (
-                        <>
-                          <div
-                            className="split-bar positive"
-                            style={{ height: `${height}px` }}
-                          />
-                          <span className="bar-value positive-text">
-                            {value.toFixed(1)}%
-                          </span>
-                        </>
-                      )}
-                    </div>
+      {(hasData ? data.good.slice(0, 5) : []).map((item) => {
+        const percent = Math.abs(item.percentage);
+        const barWidth = Math.min(percent * 1.4, 100);
 
-                    <div className="zero-line"></div>
-
-                    <div className="negative-zone">
-                      {value > 0 && (
-                        <>
-                          <span className="bar-value negative-text">
-                            +{value.toFixed(1)}%
-                          </span>
-                          <div
-                            className="split-bar negative"
-                            style={{ height: `${height}px` }}
-                          />
-                        </>
-                      )}
-                    </div>
-
-                    <div className="split-label">{item.task}</div>
-                  </div>
-                );
-              })}
+        return (
+          <div className="hbar-row" key={item.task}>
+            <div className="hbar-label">{item.task}</div>
+            <div className="hbar-track">
+              <div
+                className="hbar hbar-good"
+                style={{ width: `${barWidth}%` }}
+              />
+            </div>
+            <div className="hbar-value">{item.percentage.toFixed(1)}%</div>
           </div>
-        </div>
+        );
+      })}
+    </div>
 
+    <div className="chart-list chart-list-bad">
+      <div className="chart-list-title">🔴 BOVEN NORM</div>
+
+      {(hasData ? data.bad.slice(0, 5) : []).map((item) => {
+        const percent = Math.abs(item.percentage);
+        const barWidth = Math.min(percent * 1.4, 100);
+
+        return (
+          <div className="hbar-row" key={item.task}>
+            <div className="hbar-label">{item.task}</div>
+            <div className="hbar-track">
+              <div
+                className="hbar hbar-bad"
+                style={{ width: `${barWidth}%` }}
+              />
+            </div>
+            <div className="hbar-value">+{item.percentage.toFixed(1)}%</div>
+          </div>
+        );
+      })}
+    </div>
+  </div>
+</div>
        <div className="road-section">
   <h2 className="road-title">SAMEN OP WEG NAAR TOPRESULTATEN!</h2>
 
