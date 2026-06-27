@@ -550,3 +550,68 @@ right: 25px;
 .tractor-result-board.board-red {
   background: #d71920;
 }
+.horizontal-chart {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 22px;
+  text-align: left;
+}
+
+.chart-list {
+  padding: 8px 12px;
+}
+
+.chart-list-good {
+  border-right: 2px solid #d8e1ec;
+}
+
+.chart-list-title {
+  font-size: 16px;
+  font-weight: 900;
+  color: #061936;
+  margin-bottom: 10px;
+}
+
+.hbar-row {
+  display: grid;
+  grid-template-columns: 145px 1fr 64px;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.hbar-label {
+  font-size: 13px;
+  font-weight: 900;
+  color: #061936;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.hbar-track {
+  height: 18px;
+  background: #eef2f6;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.hbar {
+  height: 100%;
+  border-radius: 10px;
+}
+
+.hbar-good {
+  background: #45ad45;
+}
+
+.hbar-bad {
+  background: #ef3228;
+}
+
+.hbar-value {
+  font-size: 13px;
+  font-weight: 900;
+  text-align: right;
+  color: #061936;
+}
